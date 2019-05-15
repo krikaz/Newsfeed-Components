@@ -33,34 +33,47 @@ const newData = {
 
 class CreateArticle {
   constructor(data) {
+    this.data = data;
+    this.article = document.createElement("div");
+    this.article.classList.add("article");
+    this.createHeading();
+    this.createDate();
+    this.createParagraphs();
+    this.createSpan();
+    document.body.insertAdjacentElement("afterend", this.article);
+  }
+
+  createHeading() {
     const heading = document.createElement("h2");
-    heading.textContent = data.heading;
+    heading.textContent = this.data.heading;
+    this.article.appendChild(heading);
+  }
 
+  createDate() {
     const date = document.createElement("p");
-    date.textContent = data.date;
-    date.classList.add('date');
+    date.textContent = this.data.date;
+    date.classList.add("date");
+    this.article.appendChild(date);
+  }
 
+  createParagraphs() {
     const paragraphs = [];
-    data.paragraphs.forEach(item => {
+    this.data.paragraphs.forEach(item => {
       let result = "";
       result = document.createElement("p");
       result.textContent = item;
       paragraphs.push(result);
     });
-
-    const span = document.createElement('span');
-    span.textContent = 'expand';
-    span.classList.add('expandButton');
-
-    const article = document.createElement("div");
-    article.classList.add('article');
-    article.appendChild(heading);
-    article.appendChild(date);
     paragraphs.forEach(item => {
-      article.appendChild(item);
+      this.article.appendChild(item);
     });
-    article.appendChild(span);
-    document.body.insertAdjacentElement("afterend", article);
+  }
+
+  createSpan() {
+    const span = document.createElement("span");
+    span.textContent = "expand";
+    span.classList.add("expandButton");
+    this.article.appendChild(span);
   }
 }
 
