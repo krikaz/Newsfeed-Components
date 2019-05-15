@@ -31,3 +31,37 @@ const newData = {
   ]
 };
 
+class CreateArticle {
+  constructor(data) {
+    const heading = document.createElement("h2");
+    heading.textContent = data.heading;
+
+    const date = document.createElement("p");
+    date.textContent = data.date;
+    date.classList.add('date');
+
+    const paragraphs = [];
+    data.paragraphs.forEach(item => {
+      let result = "";
+      result = document.createElement("p");
+      result.textContent = item;
+      paragraphs.push(result);
+    });
+
+    const span = document.createElement('span');
+    span.textContent = 'expand';
+    span.classList.add('expandButton');
+
+    const article = document.createElement("div");
+    article.classList.add('article');
+    article.appendChild(heading);
+    article.appendChild(date);
+    paragraphs.forEach(item => {
+      article.appendChild(item);
+    });
+    article.appendChild(span);
+    document.body.insertAdjacentElement("afterend", article);
+  }
+}
+
+const newArticle = new CreateArticle(newData);
